@@ -4,45 +4,51 @@ import isRingCentralPassword from './isRingCentralPassword';
 
 
 export default function isLimitedExtensionPostRequest(requestObj) {
+  let errors = [];
+
   if (typeof requestObj !== 'object') {
-    throw new Error(`should be an object not ${typeof requestObj}`);
+    errors.push(`should be an object not ${typeof requestObj}`);
   }
 
   if (!requestObj.ivrPin) {
-    throw new Error('ivrPin required');
+    errors.push('ivrPin required');
   } else if (isRingCentralIvrPin(requestObj.ivrPin) === false) {
-    throw new Error(`ivrPin is invalid. Should be 6 digits, non sequestial, and repeated numbers. You sent ${requestObj.ivrPin}`);
+    errors.push(`ivrPin is invalid. Should be 6 digits, non sequestial, and repeated numbers. You sent ${requestObj.ivrPin}`);
   }
 
   if (!requestObj.password) {
-    throw new Error('passowrd required');
+    errors.push('passowrd required');
   } else if (isRingCentralPassword(requestObj.password) === false) {
-    throw new Error(`password is invalid. Should have an upper case, lower case, special character, and a number. You sent ${requestObj.password}`);
+    errors.push(`password is invalid. Should have an upper case, lower case, special character, and a number. You sent ${requestObj.password}`);
   }
 
   if (!requestObj.type) {
-    throw new Error('type required');
+    errors.push('type required');
   } else if (requestObj.type !== 'Limited') {
-    throw new Error(`type should be 'Limited'. You sent ${requestObj.type}`);
+    errors.push(`type should be 'Limited'. You sent ${requestObj.type}`);
   }
 
   if (!requestObj.contact) {
-    throw new Error('contact body required');
+    errors.push('contact body required');
   }
 
   if (!requestObj.contact.firstName) {
-    throw new Error('contact.firstName required');
+    errors.push('contact.firstName required');
   }
 
   if (requestObj.contact.lastName) {
-    throw new Error('contact.lastName forbidden');
+    errors.push('contact.lastName forbidden');
   }
 
   if (!requestObj.contact.email) {
-    throw new Error('contact.email required');
+    errors.push('contact.email required');
   } else if (isEmail(requestObj.contact.email) === false) {
-    throw new Error(`contact.email is invalid. You sent ${contact.email}`);
+    errors.push(`contact.email is invalid. You sent ${requestObj.contact.email}`);
   }
 
-  return true;
+  if (errors.length > 0) {
+    throw new Error(errors.join(', '));
+  } else {
+    return true;
+  }
 }
