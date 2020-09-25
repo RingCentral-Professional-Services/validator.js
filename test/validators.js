@@ -169,6 +169,24 @@ describe('Validators', () => {
     });
   });
 
+  it('should validate RingCentral Limited Extension Put Request', () => {
+    test({
+      validator: 'isLimitedExtensionPutRequest',
+      valid: [
+        {
+          extensionNumber: '123',
+          contact: {
+            firstName: '123',
+            email: 'john.celoria@ringcentral.com',
+          },
+          password: 'P@ssw0rd123',
+          ivrPin: '010203',
+        },
+      ],
+      invalid: [],
+    });
+  });
+
   it('should validate email addresses with domain specific validation', () => {
     test({
       validator: 'isEmail',

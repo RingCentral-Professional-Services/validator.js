@@ -89,6 +89,7 @@ import isSlug from './lib/isSlug';
 import isRingCentralIvrPin from './lib/isRingCentralIvrPin';
 import isRingCentralPassword from './lib/isRingCentralPassword';
 import isLimitedExtensionPostRequest from './lib/isLimitedExtensionPostRequest';
+import isLimitedExtensionPutRequest from './lib/isLimitedExtensionPutRequest';
 var version = '13.1.1';
 var validator = {
   version: version,
@@ -188,6 +189,7 @@ var validator = {
   isDate: isDate,
   isRingCentralIvrPin: isRingCentralIvrPin,
   isRingCentralPassword: isRingCentralPassword,
-  isLimitedExtensionPostRequest: isLimitedExtensionPostRequest
+  isLimitedExtensionPostRequest: isLimitedExtensionPostRequest,
+  isLimitedExtensionPutRequest: isLimitedExtensionPutRequest
 };
 export default validator;
