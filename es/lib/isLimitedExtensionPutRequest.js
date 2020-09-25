@@ -3,46 +3,34 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 import isEmail from './isEmail';
 import isRingCentralIvrPin from './isRingCentralIvrPin';
 import isRingCentralPassword from './isRingCentralPassword';
-export default function isLimitedExtensionPostRequest(requestObj) {
+export default function isLimitedExtensionPutRequest(requestObj) {
   var errors = [];
 
   if (_typeof(requestObj) !== 'object') {
     errors.push("should be an object not ".concat(_typeof(requestObj)));
   }
 
-  if (!requestObj.ivrPin) {
-    errors.push('ivrPin required');
-  } else if (isRingCentralIvrPin(requestObj.ivrPin) === false) {
+  if (requestObj.ivrPin && isRingCentralIvrPin(requestObj.ivrPin) === false) {
     errors.push("ivrPin is invalid. Should be 6 digits, non sequestial, and repeated numbers. You sent ".concat(requestObj.ivrPin));
   }
 
-  if (!requestObj.password) {
-    errors.push('password required');
-  } else if (isRingCentralPassword(requestObj.password) === false) {
+  if (requestObj.password && isRingCentralPassword(requestObj.password) === false) {
     errors.push("password is invalid. Should have an upper case, lower case, special character, and a number. You sent ".concat(requestObj.password));
   }
 
-  if (!requestObj.type) {
-    errors.push('type required');
-  } else if (requestObj.type !== 'Limited') {
-    errors.push("type should be 'Limited'. You sent ".concat(requestObj.type));
+  if (requestObj.type) {
+    errors.push('cannot change type of extension');
   }
 
-  if (!requestObj.contact) {
-    errors.push('contact body required');
-  }
-
-  if (!requestObj.contact.firstName) {
+  if (requestObj.contact && !requestObj.contact.firstName) {
     errors.push('contact.firstName required');
   }
 
-  if (requestObj.contact.lastName) {
+  if (requestObj.contact && requestObj.contact.lastName) {
     errors.push('contact.lastName forbidden');
   }
 
-  if (!requestObj.contact.email) {
-    errors.push('contact.email required');
-  } else if (isEmail(requestObj.contact.email) === false) {
+  if (requestObj.contact && isEmail(requestObj.contact.email) === false) {
     errors.push("contact.email is invalid. You sent ".concat(requestObj.contact.email));
   }
 
