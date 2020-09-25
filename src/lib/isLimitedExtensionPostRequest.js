@@ -17,7 +17,7 @@ export default function isLimitedExtensionPostRequest(requestObj) {
   }
 
   if (!requestObj.password) {
-    errors.push('passowrd required');
+    errors.push('password required');
   } else if (isRingCentralPassword(requestObj.password) === false) {
     errors.push(`password is invalid. Should have an upper case, lower case, special character, and a number. You sent ${requestObj.password}`);
   }
