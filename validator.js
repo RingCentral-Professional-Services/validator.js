@@ -2990,6 +2990,11 @@ function isRingCentralPassword(str) {
   return passwordRegex.test(str);
 }
 
+var ivrPinRegex$1 = new RegExp(/(111|211|311|411|511|611|711|811|911|988)/, 'i');
+function isRingCentralExtensionNumber(extensionNumber) {
+  return !ivrPinRegex$1.test(extensionNumber);
+}
+
 function isLimitedExtensionPostRequest(requestObj) {
   var errors = [];
 
@@ -3007,6 +3012,12 @@ function isLimitedExtensionPostRequest(requestObj) {
     errors.push('password required');
   } else if (isRingCentralPassword(requestObj.password) === false) {
     errors.push("password is invalid. Should have an upper case, lower case, special character, and a number. You sent ".concat(requestObj.password));
+  }
+
+  if (!requestObj.extensionNumber) {
+    errors.push('Extension number is required');
+  } else if (isRingCentralExtensionNumber(requestObj.extensionNumber) === false) {
+    errors.push("Extension number ".concat(requestObj.extensionNumber, " is invalid"));
   }
 
   if (!requestObj.type) {
@@ -3076,11 +3087,6 @@ function isLimitedExtensionPutRequest(requestObj) {
   } else {
     return true;
   }
-}
-
-var ivrPinRegex$1 = new RegExp(/(111|211|311|411|511|611|711|811|911|988)/, 'i');
-function isRingCentralExtensionNumber(extensionNumber) {
-  return !ivrPinRegex$1.test(extensionNumber);
 }
 
 var version = '13.1.1';

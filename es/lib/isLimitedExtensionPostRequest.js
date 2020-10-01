@@ -3,6 +3,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 import isEmail from './isEmail';
 import isRingCentralIvrPin from './isRingCentralIvrPin';
 import isRingCentralPassword from './isRingCentralPassword';
+import isRingCentralExtensionNumber from './isRingCentralExtensionNumber';
 export default function isLimitedExtensionPostRequest(requestObj) {
   var errors = [];
 
@@ -20,6 +21,12 @@ export default function isLimitedExtensionPostRequest(requestObj) {
     errors.push('password required');
   } else if (isRingCentralPassword(requestObj.password) === false) {
     errors.push("password is invalid. Should have an upper case, lower case, special character, and a number. You sent ".concat(requestObj.password));
+  }
+
+  if (!requestObj.extensionNumber) {
+    errors.push('Extension number is required');
+  } else if (isRingCentralExtensionNumber(requestObj.extensionNumber) === false) {
+    errors.push("Extension number ".concat(requestObj.extensionNumber, " is invalid"));
   }
 
   if (!requestObj.type) {
