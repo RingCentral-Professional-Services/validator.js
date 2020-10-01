@@ -119,6 +119,7 @@ import isRingCentralIvrPin from './lib/isRingCentralIvrPin';
 import isRingCentralPassword from './lib/isRingCentralPassword';
 import isLimitedExtensionPostRequest from './lib/isLimitedExtensionPostRequest';
 import isLimitedExtensionPutRequest from './lib/isLimitedExtensionPutRequest';
+import isRingCentralExtensionNumber from './lib/isRingCentralExtensionNumber';
 
 const version = '13.1.1';
 
@@ -222,6 +223,7 @@ const validator = {
   isRingCentralPassword,
   isLimitedExtensionPostRequest,
   isLimitedExtensionPutRequest,
+  isRingCentralExtensionNumber,
 };
 
 export default validator;

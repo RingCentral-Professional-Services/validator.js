@@ -2978,7 +2978,7 @@ function isSlug(str) {
   return charsetRegex.test(str);
 }
 
-var ivrPinRegex = new RegExp(/(012|123|234|345|456|567|678|789|987|876|765|654|543|432|210|000|111|222|333|444|555|666|777|888|999)/, 'i');
+var ivrPinRegex = new RegExp(/(012|123|234|345|456|567|678|789|987|876|765|654|543|432|321|210|000|111|222|333|444|555|666|777|888|999)/, 'i');
 function isRingCentralIvrPin(str) {
   assertString(str);
   return !ivrPinRegex.test(str);
@@ -3076,6 +3076,11 @@ function isLimitedExtensionPutRequest(requestObj) {
   } else {
     return true;
   }
+}
+
+var ivrPinRegex$1 = new RegExp(/(111|211|311|411|511|611|711|811|911|988)/, 'i');
+function isRingCentralExtensionNumber(extensionNumber) {
+  return !ivrPinRegex$1.test(extensionNumber);
 }
 
 var version = '13.1.1';
@@ -3178,7 +3183,8 @@ var validator = {
   isRingCentralIvrPin: isRingCentralIvrPin,
   isRingCentralPassword: isRingCentralPassword,
   isLimitedExtensionPostRequest: isLimitedExtensionPostRequest,
-  isLimitedExtensionPutRequest: isLimitedExtensionPutRequest
+  isLimitedExtensionPutRequest: isLimitedExtensionPutRequest,
+  isRingCentralExtensionNumber: isRingCentralExtensionNumber
 };
 
 return validator;
