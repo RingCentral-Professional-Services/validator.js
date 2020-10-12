@@ -1,7 +1,3 @@
-import isEmail from './isEmail';
-import isRingCentralIvrPin from './isRingCentralIvrPin';
-import isRingCentralPassword from './isRingCentralPassword';
-import isRingCentralExtensionNumber from './isRingCentralExtensionNumber';
 import isMobilePhone from './isMobilePhone';
 
 
